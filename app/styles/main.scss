@@ -1,18 +1,34 @@
-// bower:scss
-// endbower
-
 body {
+  height: 100%;
+  width: 100%;
   background: #fafafa;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #ddd;
   background-color: #111;
+
   .container {
+    height: 100%;
+    width: 100%;
     text-align: center;
-    .randomPlay {
+
+    #randomPlay {
       display: inline-block;
       height: 75px;
       width: 75px;
-      background: url('.././assets/play-button.png') no-repeat 100%/contain;
+
+      &.play {
+        background: url('.././assets/play-button.png') no-repeat 100%/contain;
+      }
+
+      &.pause {
+        background: url('.././assets/pause-button.png') no-repeat 100%/contain;
+      }
+    }
+
+    .audioWrapper {
+      height: 40%;
+      width: 30%;
+      background-color: green;
     }
   }
 }
