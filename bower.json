@@ -2,7 +2,8 @@
   "name": "murmur",
   "private": true,
   "dependencies": {
-    "jquery": "~2.1.1"
+    "jquery": "~2.1.1",
+    "nouislider": "^9.2.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",

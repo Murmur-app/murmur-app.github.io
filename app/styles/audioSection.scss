@@ -3,17 +3,63 @@
   flex-flow: row wrap;
   width: 100%;
   margin-top: 20px;
+
   .audioContainer {
-    background-color: #195;
+    background-color: #ce6060;
     padding: 10px;
     box-sizing: border-box;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
     .audioImage {
       width: 50px;
     }
+
     .audioName {}
+
+    /* Number slider ------------------- */
+    .slider {
+      position: relative;
+      display: inline-block;
+      margin: -4px 6px 0 0;
+      height: 10px;
+      padding: 5px;
+    }
+
+    /* Input ------------------- */
+    .slider-input {
+      appearance: none;
+      position: relative;
+      vertical-align: middle;
+      width: 100px;
+      height: inherit;
+      border-radius: 20px;
+      background: hsl(0,0%,80%);
+      box-shadow: 0 1px 0 hsla(0,0%,100%,.6);
+      overflow: hidden;
+    }
+
+    .slider-input::-webkit-slider-thumb,
+    .slider-input::slider-thumb {
+      appearance: none;
+      border-radius: 20px;
+      width: 20px;
+      height: 20px;
+      border: 5px solid hsl(0,0%,80%);
+      cursor: pointer;
+      background: hsl(0,0%,40%);
+      box-shadow: inset 0 1px 2px hsla(0,0%,0%,.4);
+      transition: border-width 0.2s cubic-bezier(.26, .08, .15, 1);
+    }
+
+    .slider-input:active::-webkit-slider-thumb,
+    .slider-input:active::slider-thumb {
+      border: 0 solid hsl(0,0%,80%);
+      transition-duration: 0.1;
+    }
   }
 }
-
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 425px) {
   .audioContainer {
@@ -21,16 +67,14 @@
     height: 100px;
   }
 }
-
 /* iPads (portrait) ----------- */
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
   .audioContainer {
     flex: 0 0 33.33%;
   }
 }
-
 /* Desktops and laptops ----------- */
-@media only screen  and (min-width : 1224px) {
+@media only screen and (min-width : 1224px) {
   .audioContainer {
     flex: 0 0 15%;
   }
