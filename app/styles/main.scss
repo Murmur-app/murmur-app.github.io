@@ -6,13 +6,22 @@ body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #ddd;
   background-color: #111;
+  margin: 0;
+  width: 100%;
+  height: 100%;
   .container {
     text-align: center;
+    width: 100%;
+    height: 100%;
     .randomPlay {
       display: inline-block;
       height: 75px;
       width: 75px;
-      background: url('.././assets/play-button.png') no-repeat 100%/contain;
+      background: url('.././assets/images/play-button.png') no-repeat 100%/contain;
     }
+  }
+
+  .hidden {
+    display: none;
   }
 }
