@@ -19,23 +19,21 @@
   <meta name="msapplication-TileColor" content="#2F3BA2">
 
   <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="/bower_components/nouislider/distribute/nouislider.min.css">
   <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/audioSection.css">
   <!-- endbuild -->
 </head>
 
 <body>
-  <!--[if lt IE 10]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
 
-  <div class="hero-unit">
-    <h1>'Allo, 'Allo!</h1>
-    <p>You now have</p>
-    <ul>
-      <li>HTML5 Boilerplate</li>
-      <li>Sass</li>
-      <li>jQuery</li>
-    </ul>
+  <div class="container">
+    <h1>Murmur</h1>
+    <p>Wash away noise !</p>
+    <div class="randomPlay"></div>
+
+    <!-- List of audios -->
+    <div class="audioSection"></div>
   </div>
 
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
@@ -52,18 +50,20 @@
       e.src = 'https://www.google-analytics.com/analytics.js';
       r.parentNode.insertBefore(e, r)
     }(window, document, 'script', 'ga'));
-    ga('create', 'UA-XXXXX-X');
+    ga('create', 'UA-90267901-1');
     ga('send', 'pageview');
   </script>
 
   <!-- build:js scripts/vendor.js -->
   <!-- bower:js -->
   <script src="/bower_components/jquery/dist/jquery.js"></script>
+  <script src="/bower_components/nouislider/distribute/nouislider.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
   <!-- build:js scripts/main.js -->
   <script src="scripts/main.js"></script>
+  <script src="scripts/audioScript.js"></script>
   <!-- endbuild -->
 </body>
 

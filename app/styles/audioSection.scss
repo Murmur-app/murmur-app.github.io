@@ -1,0 +1,60 @@
+.audioSection {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  margin-top: 20px;
+
+  .audioContainer {
+    background-color: #ce6060;
+    padding: 10px;
+    height: 100px;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    .audioImage {
+      width: 40px;
+      margin: 0 0 10px 0;
+    }
+
+    .audioName {
+      margin-top: auto;
+    }
+
+    /* Number slider ------------------- */
+    .slider {
+      width: 70%;
+      height: 1px;
+      .noUi-handle {
+        width: 12px;
+        height: 12px;
+        left: -5px;
+        border: 0;
+        border-radius: 20px;
+        &:before, &:after {
+          display: none;
+        }
+      }
+    }
+  }
+}
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 425px) {
+  .audioContainer {
+    flex: 0 0 50%;
+    height: 100px;
+  }
+}
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+  .audioContainer {
+    flex: 0 0 33.33%;
+  }
+}
+/* Desktops and laptops ----------- */
+@media only screen and (min-width : 1224px) {
+  .audioContainer {
+    flex: 0 0 15%;
+  }
+}
