@@ -12,6 +12,8 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+    border-right: 1px solid #b65555;
+    border-bottom: 1px solid #b65555;
 
     .audioImage {
       width: 40px;
