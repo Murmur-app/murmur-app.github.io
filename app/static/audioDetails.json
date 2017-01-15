@@ -2,65 +2,65 @@
   "id": 0,
   "name": "Ocean",
   "audio": "Ocean",
-  "image": ""
+  "image": "Ocean"
 }, {
   "id": 1,
   "name": "Birds",
   "audio": "Birds",
-  "image": ""
+  "image": "Birds"
 }, {
   "id": 2,
   "name": "Fire",
   "audio": "Fire",
-  "image": ""
+  "image": "Fire"
 }, {
   "id": 3,
   "name": "Humans",
   "audio": "Humans",
-  "image": ""
+  "image": "Humans"
 }, {
   "id": 4,
   "name": "Rain",
   "audio": "Rain",
-  "image": ""
+  "image": "Rain"
 }, {
   "id": 5,
   "name": "Thunder",
   "audio": "Thunder",
-  "image": ""
+  "image": "Thunder"
 }, {
   "id": 6,
   "name": "Waves",
   "audio": "Waves",
-  "image": ""
+  "image": "Waves"
 }, {
   "id": 7,
   "name": "Waves 2",
   "audio": "Waves_2",
-  "image": ""
+  "image": "Waves_2"
 }, {
   "id": 8,
   "name": "Underwater",
   "audio": "Underwater",
-  "image": ""
+  "image": "Underwater"
 }, {
   "id": 9,
   "name": "Stream",
   "audio": "Stream",
-  "image": ""
+  "image": "Stream"
 }, {
   "id": 10,
   "name": "Storm",
   "audio": "Storm",
-  "image": ""
+  "image": "Storm"
 }, {
   "id": 11,
   "name": "Forest Waterfall",
   "audio": "Forest_waterfall",
-  "image": ""
+  "image": "Forest_waterfall"
 }, {
   "id": 12,
   "name": "Dryer",
   "audio": "Dryer",
-  "image": ""
+  "image": "Dryer"
 }]
