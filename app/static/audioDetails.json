@@ -6,37 +6,37 @@
 }, {
   "id": 1,
   "name": "Birds",
-  "audio": "birds.fade",
+  "audio": "Birds",
   "image": ""
 }, {
   "id": 2,
   "name": "Fire",
-  "audio": "fire.fade",
+  "audio": "Fire",
   "image": ""
 }, {
   "id": 3,
   "name": "Humans",
-  "audio": "humans.fade",
+  "audio": "Humans",
   "image": ""
 }, {
   "id": 4,
   "name": "Rain",
-  "audio": "rain.fade",
+  "audio": "Rain",
   "image": ""
 }, {
   "id": 5,
   "name": "Thunder",
-  "audio": "thunder.fade",
+  "audio": "Thunder",
   "image": ""
 }, {
   "id": 6,
-  "name": "Waves 1",
-  "audio": "waves.fade",
+  "name": "Waves",
+  "audio": "Waves",
   "image": ""
 }, {
   "id": 7,
   "name": "Waves 2",
-  "audio": "Waves",
+  "audio": "Waves_2",
   "image": ""
 }, {
   "id": 8,
@@ -55,6 +55,11 @@
   "image": ""
 }, {
   "id": 11,
+  "name": "Forest Waterfall",
+  "audio": "Forest_waterfall",
+  "image": ""
+}, {
+  "id": 12,
   "name": "Dryer",
   "audio": "Dryer",
   "image": ""

@@ -18,7 +18,7 @@ audioJson.forEach((obj, index) => {
   let audioImage = '<img src="./../assets/images/play-button.png" class="audioImage audioImage' + index + '" />';
   let audioSlider = '<div id="slider' + index + '" class="slider"></div>';
   let audioName = '<div class="audioName audioName' + index + '">' + obj.name + '</div>'
-  let audio = '<audio id="audio' + index + '" class="audio audio' + index + ' hidden" controls><source src="./../assets/audio/Ocean.mp3" type="audio/mpeg"></audio>';
+  let audio = '<audio id="audio' + index + '" class="audio audio' + index + ' hidden" loop><source src="./../assets/audio/'+ obj.audio +'.mp3" type="audio/mpeg"></audio>';
   let audioObjTemplate = '<div class="audioContainer" onClick="playAudio(' + index + ')">' + audioImage + audio + audioSlider + audioName + '</div>';
 
   audioWrapper.append(audioObjTemplate);
