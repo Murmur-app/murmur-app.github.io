@@ -24,7 +24,7 @@ audioJson.forEach((obj, index) => {
   audioWrapper.append(audioObjTemplate);
 });
 
-const playAudio = (audioIndex) => {
+const playAudio = (audioIndex, audioVolume = 50) => {
   let clickedAudio = $.grep(audioJson, (obj) => {
     return obj.id === audioIndex;
   })
@@ -37,7 +37,7 @@ const playAudio = (audioIndex) => {
     $('.audioItem' + audioIndex).addClass('active');
 
     noUiSlider.create(slider, {
-      start: 50,
+      start: audioVolume,
       connect: [true, false],
       range: {
         'min': 0,
@@ -60,14 +60,17 @@ const playAudio = (audioIndex) => {
     for (let i = 0; i < audioJson.length; i++) {
       if ($('.audio' + i)[0].paused) playCount++;
     }
-    if(playCount === audioJson.length)
+    if(playCount === audioJson.length) {
       // $('.randomPlay.pause').addClass( 'play' ).removeClass( 'pause' );
       $('.randomPlay.play').show();
       $('.randomPlay.pause').hide();
+    }
+
   }
 }
 
 /* Pause all the current playing audios and return the playing status */
+/* Returns true if at least one of the audio is playing */
 const pauseAll = () => {
   let playing = false;
   let audioVolumeArray = [];
@@ -80,7 +83,6 @@ const pauseAll = () => {
     }
     audioVolumeArray.push(vol);
   }
-  sessionStorage.setItem('audioVolumeArray', audioVolumeArray);
   // $('.randomPlay.pause').addClass( 'play' ).removeClass( 'pause' );
   $('.randomPlay.play').show();
   $('.randomPlay.pause').hide();
@@ -89,26 +91,37 @@ const pauseAll = () => {
 
 /* Random shuffling between the available audios */
 const shuffle = () => {
-  let maxAudio = 4;
   pauseAll();
-  for (var i = 0; i < audioJson.length; i++) {
-    if((Math.random() > .5) && maxAudio) {
-      playAudio(i);
-      maxAudio--;
+  for (var i = 0; i < 4; i++) {
+      playAudio(Math.floor(Math.random()*audioJson.length));
     }
-  }
 }
 
 /* Toggle between play and pause of global play button */
 const globalPlay = () => {
-  if(!pauseAll()) {
-    shuffle();
+  let sampleAudioCombinations = {
+    0: [.12,0,0,0.3,0,0.3,0,0,0.3,0,.78,.5],
+    1: [.9,0,0,0,0.7,0,0.8,0,0.3,0.2,0,0],
+    2: [.32,0,0.3,0,0,0,0,0.7,0.3,0.2,.2,.9],
+    3: [0.7,0,0.4,0.1,0.6,0,0,0,0.33,0.72,0,0]
+  }
+  let audioVolume = localStorage.getItem('audioVolumeArray');
+  let audioVolumeArray = [];
+  if(audioVolume) {
+    audioVolumeArray = audioVolume.split(',');
+  }
+  else {
+    audioVolumeArray = sampleAudioCombinations[Math.floor(Math.random()*4)];
+  }
+  for (let i = 0; i < audioVolumeArray.length; i++) {
+    if(parseFloat(audioVolumeArray[i]) != 0) {
+      playAudio(i, parseFloat(audioVolumeArray[i])*100);
+    }
   }
 }
 
 /* To save the current playing combination in local storage */
 const save = () => {
-  document.getElementById('audio0').volume
   let audioVolumeArray = [];
   for (let i = 0; i < audioJson.length; i++) {
     let vol = 0;
@@ -118,10 +131,6 @@ const save = () => {
     audioVolumeArray.push(vol);
   }
   localStorage.setItem('audioVolumeArray', audioVolumeArray);
-}
-
-const changeActiveIcon = () => {
-
 }
 
 $(function() {
