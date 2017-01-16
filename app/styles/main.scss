@@ -15,6 +15,9 @@ body {
   margin: 0;
   width: 100vw;
   height: 100vh;
+  -webkit-tap-highlight-color: transparent;
+  transform: translate3d(0,0,0);
+  
   .container {
     text-align: center;
     width: 100%;
