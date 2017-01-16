@@ -63,9 +63,9 @@ gulp.task('html', ['styles', 'scripts'], () => {
 });
 
 gulp.task('images', () => {
-  return gulp.src('app/images/**/*')
+  return gulp.src('app/assets/**/*')
     .pipe($.cache($.imagemin()))
-    .pipe(gulp.dest('dist/images'));
+    .pipe(gulp.dest('dist/assets'));
 });
 
 gulp.task('fonts', () => {
@@ -76,8 +76,10 @@ gulp.task('fonts', () => {
 
 gulp.task('extras', () => {
   return gulp.src([
-    'app/*',
-    '!app/*.html'
+    'app/**/*',
+    '!app/*.html',
+    '!app/**/*.scss',
+    '!app/**/*.js'
   ], {
     dot: true
   }).pipe(gulp.dest('dist'));
