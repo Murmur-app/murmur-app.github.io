@@ -1,31 +1,61 @@
+// bower:scss
+// endbower
+@import 'mixins.scss';
+@import 'colors.scss';
+
+@include font-face(roboto-regular);
+@include font-face(OpenSans-Light);
+@include font-face(OpenSans-Regular);
+
+
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: OpenSans-Regular, Helvetica, sans-serif;
   color: #fff;
-  background-color: #25828e;
+  background-color: $palette_dark;
   margin: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   .container {
     text-align: center;
     width: 100%;
     height: 100%;
-    .randomPlay {
-      display: inline-block;
-      height: 75px;
-      width: 75px;
-      &.play {
-        background: url('.././assets/images/play-button.png') no-repeat 100%/contain;
+    position: relative;
+
+    .playSection {
+      position: fixed;
+      z-index: 5;
+      bottom: 0;
+      height: 20%;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: $palette_darker;
+
+      .randomPlay {
+        display: block;
+        .control {
+          height: 30px;
+          width: 30px;
+        }
+        .control-icon {
+          height: 65px;
+          width: 65px;
+          &.play-icon {
+            margin-left: 6px;
+          }
+        }
+
+        &.play, &.pause {
+          height: 65px;
+          width: 65px;
+          padding: 15px;
+          border: 3px solid $white;
+          border-radius: 100%;
+        }
       }
-      &.pause {
-        background: url('.././assets/images/pause-button.png') no-repeat 100%/contain;
-      }
-      &.shuffle {
-        background: url('.././assets/images/shuffle-button.svg') no-repeat 100%/50%;
-      }
-      &.save {
-        background: url('.././assets/images/save-button.svg') no-repeat 100%/50%;
-      }
-      }
+    }
+  }
 
   .hidden {
     display: none;

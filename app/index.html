@@ -28,14 +28,25 @@
 <body>
 
   <div class="container">
-    <h1>Murmur</h1>
-    <p>Wash away noise !</p>
-    <div class="randomPlay play" onclick="globalPlay()"></div>
-    <div class="randomPlay shuffle" onclick="shuffle()"></div>
-    <div class="randomPlay save" onclick="save()"></div>
 
     <!-- List of audios -->
     <div class="audioSection"></div>
+    <div class="playSection">
+      <div class="randomPlay save" onclick="save()">
+        <img src="./../assets/images/save-button.svg" class="svg control save-icon" />
+      </div>
+      <div class="play_pause">
+        <div class="randomPlay play" onclick="globalPlay()">
+          <img src="./../assets/images/play-button.svg" class="svg control control-icon play-icon"/>
+        </div>
+        <div class="randomPlay pause" onclick="globalPlay()">
+          <img src="./../assets/images/pause-button.svg" class="svg control control-icon pause-icon" />
+        </div>
+      </div>
+      <div class="randomPlay shuffle" onclick="shuffle()">
+        <img src="./../assets/images/shuffle-button.svg" class="svg control shuffle-icon" />
+      </div>
+    </div>
   </div>
 
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
