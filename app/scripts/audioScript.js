@@ -46,8 +46,67 @@ const playAudio = (audioIndex) => {
     slider.noUiSlider.on('update', (values, handle) => {
       currAudio.volume = Math.round(values[handle])/100;
     });
-  } else {
+    $(".randomPlay.play").addClass( "pause" ).removeClass( "play" );
+  }
+  else {
     currAudio.pause();
     slider.noUiSlider.destroy();
+    let playCount = 0;
+    for (let i = 0; i < audioJson.length; i++) {
+      if ($('.audio' + i)[0].paused) playCount++;
+    }
+    if(playCount === audioJson.length)
+      $(".randomPlay.pause").addClass( "play" ).removeClass( "pause" );
   }
+}
+
+/* Pause all the current playing audios and return the playing status */
+const pauseAll = () => {
+  let playing = false;
+  let audioVolumeArray = [];
+  for (let i = 0; i < audioJson.length; i++) {
+    let vol = 0;
+    if (!$('.audio' + i)[0].paused) {
+      playAudio(i);
+      vol = document.getElementById('audio' + i).volume;
+      playing = true;
+    }
+    audioVolumeArray.push(vol);
+  }
+  sessionStorage.setItem("audioVolumeArray", audioVolumeArray);
+  $(".randomPlay.pause").addClass( "play" ).removeClass( "pause" );
+  return playing;
+}
+
+/* Random shuffling between the available audios */
+const shuffle = () => {
+  let maxAudio = 4;
+  pauseAll();
+  for (var i = 0; i < audioJson.length; i++) {
+    if((Math.random() > .5) && maxAudio) {
+      playAudio(i);
+      maxAudio--;
+    }
+  }
+}
+
+/* Toggle between play and pause of global play button */
+const globalPlay = () => {
+  if(!pauseAll()) {
+    shuffle();
+  }
+}
+
+/* To save the current playing combination in local storage */
+const save = () => {
+  document.getElementById('audio0').volume
+  let audioVolumeArray = [];
+  for (let i = 0; i < audioJson.length; i++) {
+    let vol = 0;
+    if (!$('.audio' + i)[0].paused) {
+      vol = document.getElementById('audio' + i).volume;
+    }
+    audioVolumeArray.push(vol);
+  }
+  localStorage.setItem("audioVolumeArray", audioVolumeArray);
 }
