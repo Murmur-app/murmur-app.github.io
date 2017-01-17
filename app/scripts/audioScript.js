@@ -15,7 +15,7 @@ const audioJson = (function() {
 const audioWrapper = $('.audioSection');
 
 audioJson.forEach((obj, index) => {
-  let audioImage = '<img src="./../assets/images/' + obj.image + '.svg" class="svg audioImage audioImage' + index + '" />';
+  let audioImage = '<img src="./../assets/images/audio-icons/' + obj.image + '.svg" class="svg audioImage audioImage' + index + '" />';
   let audioSlider = '<div id="slider' + index + '" class="slider"></div>';
   let audioName = '<div class="audioName audioName' + index + '">' + obj.name + '</div>'
   let audio = '<audio id="audio' + index + '" class="audio audio' + index + ' hidden" loop><source src="./../assets/audio/' + obj.audio + '.mp3" type="audio/mpeg"></audio>';
@@ -51,8 +51,7 @@ const playAudio = (audioIndex, audioVolume = 50) => {
     // $('.randomPlay.play').addClass( 'pause' ).removeClass( 'play' );
     $('.randomPlay.play').hide();
     $('.randomPlay.pause').show();
-  }
-  else {
+  } else {
     currAudio.pause();
     $('.audioItem' + audioIndex).removeClass('active');
     slider.noUiSlider.destroy();
@@ -60,12 +59,12 @@ const playAudio = (audioIndex, audioVolume = 50) => {
     for (let i = 0; i < audioJson.length; i++) {
       if ($('.audio' + i)[0].paused) playCount++;
     }
+
     if(playCount === audioJson.length) {
       // $('.randomPlay.pause').addClass( 'play' ).removeClass( 'pause' );
       $('.randomPlay.play').show();
       $('.randomPlay.pause').hide();
     }
-
   }
 }
 
@@ -83,6 +82,8 @@ const pauseAll = () => {
     }
     audioVolumeArray.push(vol);
   }
+
+  sessionStorage.setItem('audioVolumeArray', audioVolumeArray);
   // $('.randomPlay.pause').addClass( 'play' ).removeClass( 'pause' );
   $('.randomPlay.play').show();
   $('.randomPlay.pause').hide();
@@ -93,8 +94,8 @@ const pauseAll = () => {
 const shuffle = () => {
   pauseAll();
   for (var i = 0; i < 4; i++) {
-      playAudio(Math.floor(Math.random()*audioJson.length));
-    }
+    playAudio(Math.floor(Math.random()*audioJson.length));
+  }
 }
 
 /* Toggle between play and pause of global play button */
@@ -134,12 +135,74 @@ const save = () => {
 }
 
 $(function() {
-  const obj = {
-    runMe: function() {
-      $('.audio-icon');
-      $('.icon');
-    }
-  };
   $('.randomPlay.pause').hide();
-  convertToInlineSvg(obj);
-})
+  convertToInlineSvg();
+
+  // open menu
+  $('.menu-bar').on('click', () => {
+    if ($('.menu').hasClass('menu-hidden')) {
+      $('.menu').removeClass('menu-hidden');
+      $('.container').addClass('menu-active');
+    } else {
+      $('.menu').addClass('menu-hidden');
+      $('.container').removeClass('menu-active');
+    }
+  });
+
+  // close menu
+  $('.overlay').on('click', () => {
+    $('.menu').addClass('menu-hidden');
+    $('.container').removeClass('menu-active');
+  });
+
+  // open about modal
+  $('.about-option').on('click', (obj) => {
+    $('.menu').addClass('menu-hidden');
+    $('.container').removeClass('menu-active');
+
+    setTimeout(() => {
+      $('.about-modal').addClass('active');
+    }, 200)
+  });
+
+  // open feedback modal
+  $('.feedback-option').on('click', (obj) => {
+    $('.menu').addClass('menu-hidden');
+    $('.container').removeClass('menu-active');
+
+    setTimeout(() => {
+      $('.feedback-modal').addClass('active');
+    }, 200)
+  });
+
+  // close modal
+  $('.modal-close').on('click', () => {
+    $('.modal').addClass('animate-close');
+    setTimeout(() => {
+      $('.modal').removeClass('animate-close');
+      $('.modal').removeClass('active');
+    }, 300);
+    $('.feedback-textarea')[0].value = '';
+    $('.placeholder-text').removeClass('hidden');
+  });
+
+  // on feedback active
+  $('.feedback-textarea').on('focus', () => {
+    $('.placeholder-text').addClass('hidden');
+  });
+
+  // on feedback blur
+  $('.feedback-textarea').on('blur', () => {
+    if($('.feedback-textarea')[0].value === '') {
+      $('.placeholder-text').removeClass('hidden');
+    }
+  });
+
+  // on feedback submit
+  $('.feedback-button').on('click', () => {
+    let mailBody = $('.feedback-textarea')[0].value;
+    let subject = 'App feedback';
+    console.log(subject + '\n' + mailBody);
+    window.open('mailto:vatsalya25@gmail.com?subject='+ subject +'&body='+ mailBody);
+  });
+});

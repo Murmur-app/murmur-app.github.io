@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="description" content="">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
   <title>Murmur</title>
 
   <!-- TODO add manifest here -->
@@ -28,9 +28,20 @@
 <body>
 
   <div class="container">
+    <div class="header">
+      <div class="menu-bar">
+        <img src="./../assets/images/menu-button.svg" class="svg menu-icon" />
+      </div>
+      <div class="title" /></div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
 
     <!-- List of audios -->
     <div class="audioSection"></div>
+
+    <!-- Playback control section  -->
     <div class="playSection">
       <div class="randomPlay save" onclick="save()">
         <img src="./../assets/images/save-button.svg" class="svg control save-icon" />
@@ -45,6 +56,57 @@
       </div>
       <div class="randomPlay shuffle" onclick="shuffle()">
         <img src="./../assets/images/shuffle-button.svg" class="svg control shuffle-icon" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu options -->
+  <div class="menu menu-hidden">
+    <!-- about -->
+    <div class="menu-option about-option">
+      <div class="option">
+        <img src="./../assets/images/info-button.svg" class="svg option-icon info-icon" />
+      </div>
+      <div class="text">About Murmur</div>
+    </div>
+    <!-- email feedback -->
+    <div class="menu-option feedback-option">
+      <div class="option">
+        <img src="./../assets/images/feedback-button.svg" class="svg option-icon feedback-icon" />
+      </div>
+      <div class="text">Give Feedback</div>
+    </div>
+  </div>
+
+  <!-- About us modal -->
+  <div class="modal about-modal">
+    <div class="modal-content">
+      <div class="modal-header">About Us</div>
+      <div class="modal-close">
+        <img src="./../assets/images/cancel-button.svg" class="svg cancel-icon" />
+      </div>
+      <div class="modal-body">
+        <div>“Choose only one master – Nature”</div>
+        <div>–Rembrandt</div>
+        <div class="about">Hi! We are Vatsalya Prakash and Himanshu Singh, two developers with a passion for creativity; and we strongly believe that nature is the best source to boost your imaginative minds. Thus, we came up with <b>Murmur</b>, which attempts to bring you as close to nature as you possible can from the comfort of your home or office.</div>
+        <div class="about">So, put on your headphones and let your creativity run free.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Foodback modal -->
+  <div class="modal feedback-modal">
+    <div class="modal-content">
+      <div class="modal-header">Feedback</div>
+      <div class="modal-close">
+        <img src="./../assets/images/cancel-button.svg" class="svg cancel-icon" />
+      </div>
+      <div class="modal-body">
+        <textarea class="feedback-textarea"></textarea>
+        <span class="placeholder-text">Provide your valuable feedback here <3</span>
+      </div>
+      <div class="feedback-button">
+        <div class="feedback-submit">Submit Feedback</div>
       </div>
     </div>
   </div>
