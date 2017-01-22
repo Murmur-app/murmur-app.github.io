@@ -3,10 +3,12 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+  <meta name="keywords" content="Murmur, Focus on work, Whitenoise, Sleeping App, Focus on work, Wash Away Distraction, Natural Sounds, Nature Rain Cloud Water Stream">
+  <meta name="description" content="Wash away your distraction and make yourself calm by listening to soothing natural sounds">
   <title>Murmur</title>
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
 
   <!-- TODO add manifest here -->
   <link rel="manifest" href="./manifest.json">
@@ -33,31 +35,31 @@
         <img src="./assets/images/menu-button.svg" class="svg menu-icon" />
       </div>
       <div class="title" /></div>
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay"></div>
+
+  <!-- List of audios -->
+  <div class="audioSection"></div>
+
+  <!-- Playback control section  -->
+  <div class="playSection">
+    <div class="randomPlay save" onclick="save()">
+      <img src="./assets/images/save-button.svg" class="svg control save-icon" />
     </div>
-
-    <!-- Overlay -->
-    <div class="overlay"></div>
-
-    <!-- List of audios -->
-    <div class="audioSection"></div>
-
-    <!-- Playback control section  -->
-    <div class="playSection">
-      <div class="randomPlay save" onclick="save()">
-        <img src="./assets/images/save-button.svg" class="svg control save-icon" />
+    <div class="play_pause">
+      <div class="randomPlay play" onclick="globalPlay()">
+        <img src="./assets/images/play-button.svg" class="svg control control-icon play-icon" />
       </div>
-      <div class="play_pause">
-        <div class="randomPlay play" onclick="globalPlay()">
-          <img src="./assets/images/play-button.svg" class="svg control control-icon play-icon"/>
-        </div>
-        <div class="randomPlay pause hidden" onclick="save();pauseAll()">
-          <img src="./assets/images/pause-button.svg" class="svg control control-icon pause-icon" />
-        </div>
-      </div>
-      <div class="randomPlay shuffle" onclick="shuffle()">
-        <img src="./assets/images/shuffle-button.svg" class="svg control shuffle-icon" />
+      <div class="randomPlay pause hidden" onclick="save();pauseAll()">
+        <img src="./assets/images/pause-button.svg" class="svg control control-icon pause-icon" />
       </div>
     </div>
+    <div class="randomPlay shuffle" onclick="shuffle()">
+      <img src="./assets/images/shuffle-button.svg" class="svg control shuffle-icon" />
+    </div>
+  </div>
   </div>
 
   <!-- Menu options -->
@@ -88,7 +90,8 @@
       <div class="modal-body">
         <div>“Choose only one master – Nature”</div>
         <div>–Rembrandt</div>
-        <div class="about">Hi! We are Vatsalya Prakash and Himanshu Singh, two developers with a passion for creativity; and we strongly believe that nature is the best source to boost your imaginative minds. Thus, we came up with <b>Murmur</b>, which attempts to bring you as close to nature as you possible can from the comfort of your home or office.</div>
+        <div class="about">Hi! We are Vatsalya Prakash and Himanshu Singh, two developers with a passion for creativity; and we strongly believe that nature is the best source to boost your imaginative minds. Thus, we came up with <b>Murmur</b>, which attempts to bring
+          you as close to nature as you possible can from the comfort of your home or office.</div>
         <div class="about">So, put on your headphones and let your creativity run free.</div>
       </div>
     </div>
