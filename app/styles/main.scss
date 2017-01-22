@@ -426,10 +426,6 @@ body {
           .control-icon {
             height: 45px;
             width: 45px;
-
-            &.play-icon {
-              margin-left: 6px;
-            }
           }
 
           &.pause, &.play {
@@ -442,6 +438,22 @@ body {
     }
     .menu {
       width: $menu-width;
+    }
+  }
+}
+
+/* iPhone 5 (portrait) ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait){
+  body .container .playSection .randomPlay {
+    .control-icon {
+      height: 55px;
+      width: 55px;
+    }
+
+    &.pause, &.play {
+      height: 55px;
+      width: 55px;
+      padding: 10px;
     }
   }
 }
