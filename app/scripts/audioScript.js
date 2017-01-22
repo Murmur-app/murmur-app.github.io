@@ -49,8 +49,8 @@ const playAudio = (audioIndex, audioVolume = 50) => {
       currAudio.volume = Math.round(values[handle]) / 100;
     });
     // $('.randomPlay.play').addClass( 'pause' ).removeClass( 'play' );
-    $('.randomPlay.play').hide();
-    $('.randomPlay.pause').show();
+    $('.randomPlay.play').addClass('hidden');
+    $('.randomPlay.pause').removeClass('hidden');
   } else {
     currAudio.pause();
     $('.audioItem' + audioIndex).removeClass('active');
@@ -62,8 +62,8 @@ const playAudio = (audioIndex, audioVolume = 50) => {
 
     if(playCount === audioJson.length) {
       // $('.randomPlay.pause').addClass( 'play' ).removeClass( 'pause' );
-      $('.randomPlay.play').show();
-      $('.randomPlay.pause').hide();
+      $('.randomPlay.play').removeClass('hidden');
+      $('.randomPlay.pause').addClass('hidden');
     }
   }
 }
@@ -85,8 +85,8 @@ const pauseAll = () => {
 
   sessionStorage.setItem('audioVolumeArray', audioVolumeArray);
   // $('.randomPlay.pause').addClass( 'play' ).removeClass( 'pause' );
-  $('.randomPlay.play').show();
-  $('.randomPlay.pause').hide();
+  $('.randomPlay.play').removeClass('hidden');
+  $('.randomPlay.pause').addClass('hidden');
   return playing;
 }
 
@@ -135,7 +135,6 @@ const save = () => {
 }
 
 $(function() {
-  $('.randomPlay.pause').hide();
   convertToInlineSvg();
 
   // open menu
@@ -143,9 +142,11 @@ $(function() {
     if ($('.menu').hasClass('menu-hidden')) {
       $('.menu').removeClass('menu-hidden');
       $('.container').addClass('menu-active');
+      $('body').addClass('hideOverflow');
     } else {
       $('.menu').addClass('menu-hidden');
       $('.container').removeClass('menu-active');
+      $('body').removeClass('hideOverflow');
     }
   });
 

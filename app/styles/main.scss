@@ -1,5 +1,6 @@
 // bower:scss
 // endbower
+
 @import 'constants.scss';
 @import 'mixins.scss';
 
@@ -54,7 +55,7 @@ body {
         position: fixed;
         left: 50%;
         transform: translateX(-50%);
-        width: 70vw;
+        width: $menu-width;
         height: $header_height;
         text-align: center;
         background: url('./../assets/images/murmur-logo.png') center center / 35% no-repeat;
@@ -77,6 +78,7 @@ body {
       .audioItem {
         background-color: $palette_grain;
         padding: 10px 20px;
+        min-height: 65px;
         max-height: 65px;
         box-sizing: border-box;
         display: flex;
@@ -135,14 +137,20 @@ body {
       z-index: 5;
       bottom: 0;
       height: 20%;
+      min-height: 85px;
       width: 100%;
       display: flex;
       justify-content: space-around;
       align-items: center;
       background-color: $palette_darker;
 
-      .randomPlay {
+      .randomPlay, .play_pause {
         display: block;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 100%;
+        width: 100%;
 
         .control {
           height: 30px;
@@ -166,15 +174,19 @@ body {
           border: 3px solid $palette_grain;
           border-radius: 100%;
         }
+
+        &.hidden {
+          display: none;
+        }
       }
     }
 
     &.menu-active {
-      margin-left: 70vw;
+      margin-left: $menu-width;
       .header .title {
         position: fixed;
         height: $header_height;
-        width: 70vw;
+        width: $menu-width;
         z-index: 9;
         top: 0;
         left: 0;
@@ -182,7 +194,7 @@ body {
       }
       .overlay {
         position: absolute;
-        z-index: 5;
+        z-index: 6;
         width: 100%;
         height: calc(100vh - #{$header_height});
         display: block;
@@ -193,11 +205,11 @@ body {
   }
 
   .menu {
-    position: absolute;
+    position: fixed;
     z-index: 8;
     top: 0;
     left: 0;
-    width: 70vw;
+    width: $menu-width;
     height: calc(100vh - #{$header_height});
     color: $palette_grain;
     background-color: $palette_dark;
@@ -342,11 +354,15 @@ body {
 
   .menu-hidden {
     display: flex;
-    margin-left: -70vw;
+    margin-left: -$menu-width;
   }
 
   .hidden {
     display: none;
+  }
+
+  &.hideOverflow {
+    overflow: hidden;
   }
 }
 
@@ -381,12 +397,62 @@ body {
     height: 100px;
   }
 }
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) and (orientation: landscape) {
+  body {
+    $menu-width: 40vw;
+    .container {
+      &.menu-active {
+        margin-left: $menu-width;
+        .header .title {
+          width: $menu-width;
+        }
+      }
+
+      .header {
+        .title {
+          width: $menu-width;
+        }
+      }
+
+      .playSection {
+        .randomPlay {
+          .control {
+            height: 25px;
+            width: 25px;
+          }
+
+          .control-icon {
+            height: 45px;
+            width: 45px;
+
+            &.play-icon {
+              margin-left: 6px;
+            }
+          }
+
+          &.pause, &.play {
+            height: 45px;
+            width: 45px;
+            padding: 10px;
+          }
+        }
+      }
+    }
+    .menu {
+      width: $menu-width;
+    }
+  }
+}
+
 /* iPads (portrait) ----------- */
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
   .audioItem {
     flex: 0 0 100%;
   }
 }
+
 /* Desktops and laptops ----------- */
 @media only screen and (min-width : 1224px) {
   .audioItem {
