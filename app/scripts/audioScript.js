@@ -83,7 +83,6 @@ const pauseAll = () => {
     audioVolumeArray.push(vol);
   }
 
-  sessionStorage.setItem('audioVolumeArray', audioVolumeArray);
   // $('.randomPlay.pause').addClass( 'play' ).removeClass( 'pause' );
   $('.randomPlay.play').removeClass('hidden');
   $('.randomPlay.pause').addClass('hidden');
@@ -114,15 +113,11 @@ const globalPlay = () => {
   else {
     audioVolumeArray = sampleAudioCombinations[Math.floor(Math.random()*4)];
   }
-  for (let i = 0; i < audioVolumeArray.length; i++) {
-    if(parseFloat(audioVolumeArray[i]) != 0) {
-      playAudio(i, parseFloat(audioVolumeArray[i])*100);
-    }
-  }
+  playCombination(audioVolumeArray);
 }
 
-/* To save the current playing combination in local storage */
-const save = () => {
+/* To save the current playing combination in local storage so that user can resume what was played last */
+const saveLastPlayed = () => {
   let audioVolumeArray = [];
   for (let i = 0; i < audioJson.length; i++) {
     let vol = 0;
@@ -207,3 +202,78 @@ $(function() {
     window.open('mailto:vatsalya25@gmail.com?subject='+ subject +'&body='+ mailBody);
   });
 });
+
+/* Save the current playing combination with a name in Local storage */
+const save = () => {
+  let savedData = localStorage.getItem('savedCombination');
+  if (savedData) {
+    let savedNames = Object.keys(jQuery.parseJSON(savedData));
+    /* If already 10 combinations are stored */
+    if (savedNames.length > 9) {
+      alert('Memory Full ! First delete some existing combination'); //Replace this with showing error modal
+      return 0;
+    }
+    /* If the combination with same name already exists */
+    else if (savedNames.indexOf($("#myID").val()) > -1) {
+      alert('combination with same name already exists');
+      return 1;
+    }
+  }
+
+  let audioVolumeArray = [];
+  for (let i = 0; i < audioJson.length; i++) {
+    let vol = 0;
+    if (!$('.audio' + i)[0].paused) {
+      vol = document.getElementById('audio' + i).volume;
+    }
+    audioVolumeArray.push(vol);
+  }
+  let savedCombination = jQuery.parseJSON(savedData) || {};
+  savedCombination[$("#myID").val() || 'Combo'] = audioVolumeArray;
+  localStorage.setItem('savedCombination', JSON.stringify(savedCombination));
+}
+
+/* Delete the existing saved combination in local storage */
+const deleteCombination = (name) => {
+  let savedData = localStorage.getItem('savedCombination');
+  if (savedData) {
+    let savedJSON = jQuery.parseJSON(savedData);
+    if (savedJSON[name]) {
+      delete savedJSON[name];
+      localStorage.setItem('savedCombination', JSON.stringify(savedJSON));
+    }
+  }
+}
+
+/* Play selected combination when a name is selected from the saved list */
+const playSavedCombination = (name) => {
+  let savedData = localStorage.getItem('savedCombination');
+  if (savedData) {
+    let savedJSON = jQuery.parseJSON(savedData);
+    if (savedJSON[name]) {
+      playCombination(savedJSON[name]);
+      return;
+    }
+  }
+  alert("Sorry ! There was some error in data. Can't play this combination");
+}
+
+/* To play a combination */
+const playCombination = (audioVolumeArray) => {
+  for (let i = 0; i < audioVolumeArray.length; i++) {
+    if (parseFloat(audioVolumeArray[i]) != 0) {
+      playAudio(i, parseFloat(audioVolumeArray[i]) * 100);
+    }
+  }
+}
+
+/* To get array of Names of all the saved combinations */
+const getCombinationsNameList = () => {
+  let savedData = localStorage.getItem('savedCombination');
+  if (savedData) {
+    return Object.keys(jQuery.parseJSON(savedData));
+  }
+  else {
+    return null;
+  }
+}
