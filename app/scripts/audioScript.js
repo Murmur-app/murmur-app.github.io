@@ -60,7 +60,7 @@ const playAudio = (audioIndex, audioVolume = 50) => {
       if ($('.audio' + i)[0].paused) playCount++;
     }
 
-    if(playCount === audioJson.length) {
+    if (playCount === audioJson.length) {
       // $('.randomPlay.pause').addClass( 'play' ).removeClass( 'pause' );
       $('.randomPlay.play').removeClass('hidden');
       $('.randomPlay.pause').addClass('hidden');
@@ -93,25 +93,24 @@ const pauseAll = () => {
 const shuffle = () => {
   pauseAll();
   for (var i = 0; i < 4; i++) {
-    playAudio(Math.floor(Math.random()*audioJson.length));
+    playAudio(Math.floor(Math.random() * audioJson.length));
   }
 }
 
 /* Toggle between play and pause of global play button */
 const globalPlay = () => {
   let sampleAudioCombinations = {
-    0: [.12,0,0,0.3,0,0.3,0,0,0.3,0,.78,.5],
-    1: [.9,0,0,0,0.7,0,0.8,0,0.3,0.2,0,0],
-    2: [.32,0,0.3,0,0,0,0,0.7,0.3,0.2,.2,.9],
-    3: [0.7,0,0.4,0.1,0.6,0,0,0,0.33,0.72,0,0]
+    0: [.12, 0, 0, 0.3, 0, 0.3, 0, 0, 0.3, 0, .78, .5],
+    1: [.9, 0, 0, 0, 0.7, 0, 0.8, 0, 0.3, 0.2, 0, 0],
+    2: [.32, 0, 0.3, 0, 0, 0, 0, 0.7, 0.3, 0.2, .2, .9],
+    3: [0.7, 0, 0.4, 0.1, 0.6, 0, 0, 0, 0.33, 0.72, 0, 0]
   }
   let audioVolume = localStorage.getItem('audioVolumeArray');
   let audioVolumeArray = [];
-  if(audioVolume) {
+  if (audioVolume) {
     audioVolumeArray = audioVolume.split(',');
-  }
-  else {
-    audioVolumeArray = sampleAudioCombinations[Math.floor(Math.random()*4)];
+  } else {
+    audioVolumeArray = sampleAudioCombinations[Math.floor(Math.random() * 4)];
   }
   playCombination(audioVolumeArray);
 }
@@ -142,18 +141,24 @@ const closeModal = () => {
 
 /* Save the current playing combination with a name in Local storage */
 const saveCombination = () => {
+  const enteredName = $('#combo-input').val();
   let savedData = localStorage.getItem('savedCombination');
+
+  if(enteredName === '') {
+    return 'Name cannot be empty. Please enter a valid name.';
+  }
+
   if (savedData) {
     let savedNames = Object.keys(jQuery.parseJSON(savedData));
     /* If already 10 combinations are stored */
     if (savedNames.length > 9) {
       // alert('Memory Full ! First delete some existing combination'); //Replace this with showing error modal
-      return 'Memory Full ! First delete some existing combination';
+      return 'Memory Full! First delete an existing combination.';
     }
     /* If the combination with same name already exists */
-    else if (savedNames.indexOf($('#combo-input').val()) > -1) {
+    else if (savedNames.indexOf(enteredName) > -1) {
       // alert('combination with same name already exists');
-      return 'combination with same name already exists';
+      return 'Combination with the same name already exists.';
     }
   }
 
@@ -166,7 +171,7 @@ const saveCombination = () => {
     audioVolumeArray.push(vol);
   }
   let savedCombination = jQuery.parseJSON(savedData) || {};
-  savedCombination[$('#combo-input').val() || 'Combo'] = audioVolumeArray;
+  savedCombination[enteredName || 'Combo '] = audioVolumeArray;
   localStorage.setItem('savedCombination', JSON.stringify(savedCombination));
   return 'success';
 }
@@ -212,15 +217,20 @@ const getCombinationsNameList = () => {
     const savedNames = Object.keys(jQuery.parseJSON(savedData));
     const altMenu = $('.alt-menu');
     savedNames.forEach((name) => {
-      let template = '<div class="menu-option combo-option"><div class="option"><img src="./assets/images/music-icon.svg" class="svg option-icon info-icon" /></div><div class="text">' + name + '</div><div class="option delete-sound" onClick="deleteCombination(\"'+ name +'\")"><img src="./assets/images/delete-button.svg" class="svg option-icon delete-icon" /></div></div>';
+      let template = '<div class="menu-option combo-option"><div class="option"><img src="./assets/images/music-icon.svg" class="svg option-icon info-icon" /></div><div class="text">' + name + '</div><div class="option delete-sound" onClick="deleteCombination(\"' + name + '\")"><img src="./assets/images/delete-button.svg" class="svg option-icon delete-icon" /></div></div>';
       altMenu.append(template);
     })
     convertToInlineSvg();
-  }
-  else {
+  } else {
     return null;
   }
 }
+
+// set cursor to end of value in save combo modal
+$.fn.setCursorToTextEnd = function() {
+  var $initialVal = this.val();
+  this.val($initialVal);
+};
 
 
 $(function() {
@@ -293,7 +303,7 @@ $(function() {
 
   // on feedback textarea blur
   $('.feedback-textarea').on('blur', () => {
-    if($('.feedback-textarea')[0].value === '') {
+    if ($('.feedback-textarea')[0].value === '') {
       $('.placeholder-text').removeClass('hidden');
     }
   });
@@ -302,16 +312,17 @@ $(function() {
   $('.feedback-button').on('click', () => {
     let mailBody = $('.feedback-textarea')[0].value;
     let subject = 'App feedback';
-    console.log(subject + '\n' + mailBody);
-    window.open('mailto:vatsalya25@gmail.com?subject='+ subject +'&body='+ mailBody);
+    window.open('mailto:vatsalya25@gmail.com?subject=' + subject + '&body=' + mailBody);
   });
 
-  // On clicking save button
+  // open save combination modal
   $('.randomPlay.save').on('click', () => {
     $('.saveName-modal').addClass('active');
+    $('.combo-error').text('');
 
     setTimeout(() => {
-      $('.combo-input').focus();
+      $('#combo-input').focus();
+      $('#combo-input').setCursorToTextEnd();
     }, 10);
   });
 
@@ -333,7 +344,17 @@ $(function() {
   // on Saving a combination
   $('.save-button').on('click', () => {
     let msg = saveCombination();
-    console.log(msg);
+    if(msg !== 'success') {
+      $('.combo-error').text(msg);
+      $('#combo-input').focus();
+    } else {
+      closeModal();
+    }
+  });
+
+  // While typing the input combination name - remove any error messages
+  $('#combo-input').on('change paste keyup', () => {
+    $('.combo-error').text('');
   });
 
   // on clicking delete for a saved sound from the alternate menu

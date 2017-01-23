@@ -378,6 +378,11 @@ body {
           border: 0;
           border-bottom: 1px solid $palette_dark;
         }
+        .combo-error {
+          margin: 10px auto;;
+          width: 80%;
+          color: $palette_oxblood;
+        }
       }
 
       .modal-button {
