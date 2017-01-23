@@ -129,94 +129,31 @@ const saveLastPlayed = () => {
   localStorage.setItem('audioVolumeArray', audioVolumeArray);
 }
 
-$(function() {
-  convertToInlineSvg();
-
-  // open menu
-  $('.menu-bar').on('click', () => {
-    if ($('.menu').hasClass('menu-hidden')) {
-      $('.menu').removeClass('menu-hidden');
-      $('.container').addClass('menu-active');
-      $('body').addClass('hideOverflow');
-    } else {
-      $('.menu').addClass('menu-hidden');
-      $('.container').removeClass('menu-active');
-      $('body').removeClass('hideOverflow');
-    }
-  });
-
-  // close menu
-  $('.overlay').on('click', () => {
-    $('.menu').addClass('menu-hidden');
-    $('.container').removeClass('menu-active');
-  });
-
-  // open about modal
-  $('.about-option').on('click', (obj) => {
-    $('.menu').addClass('menu-hidden');
-    $('.container').removeClass('menu-active');
-
-    setTimeout(() => {
-      $('.about-modal').addClass('active');
-    }, 200)
-  });
-
-  // open feedback modal
-  $('.feedback-option').on('click', (obj) => {
-    $('.menu').addClass('menu-hidden');
-    $('.container').removeClass('menu-active');
-
-    setTimeout(() => {
-      $('.feedback-modal').addClass('active');
-    }, 200)
-  });
-
-  // close modal
-  $('.modal-close').on('click', () => {
-    $('.modal').addClass('animate-close');
-    setTimeout(() => {
-      $('.modal').removeClass('animate-close');
-      $('.modal').removeClass('active');
-    }, 300);
-    $('.feedback-textarea')[0].value = '';
-    $('.placeholder-text').removeClass('hidden');
-  });
-
-  // on feedback active
-  $('.feedback-textarea').on('focus', () => {
-    $('.placeholder-text').addClass('hidden');
-  });
-
-  // on feedback blur
-  $('.feedback-textarea').on('blur', () => {
-    if($('.feedback-textarea')[0].value === '') {
-      $('.placeholder-text').removeClass('hidden');
-    }
-  });
-
-  // on feedback submit
-  $('.feedback-button').on('click', () => {
-    let mailBody = $('.feedback-textarea')[0].value;
-    let subject = 'App feedback';
-    console.log(subject + '\n' + mailBody);
-    window.open('mailto:vatsalya25@gmail.com?subject='+ subject +'&body='+ mailBody);
-  });
-});
+// To close an open modal box
+const closeModal = () => {
+  $('.modal').addClass('animate-close');
+  setTimeout(() => {
+    $('.modal').removeClass('animate-close');
+    $('.modal').removeClass('active');
+  }, 300);
+  $('.feedback-textarea')[0].value = '';
+  $('.placeholder-text').removeClass('hidden');
+}
 
 /* Save the current playing combination with a name in Local storage */
-const save = () => {
+const saveCombination = () => {
   let savedData = localStorage.getItem('savedCombination');
   if (savedData) {
     let savedNames = Object.keys(jQuery.parseJSON(savedData));
     /* If already 10 combinations are stored */
     if (savedNames.length > 9) {
-      alert('Memory Full ! First delete some existing combination'); //Replace this with showing error modal
-      return 0;
+      // alert('Memory Full ! First delete some existing combination'); //Replace this with showing error modal
+      return 'Memory Full ! First delete some existing combination';
     }
     /* If the combination with same name already exists */
-    else if (savedNames.indexOf($("#myID").val()) > -1) {
-      alert('combination with same name already exists');
-      return 1;
+    else if (savedNames.indexOf($('#combo-input').val()) > -1) {
+      // alert('combination with same name already exists');
+      return 'combination with same name already exists';
     }
   }
 
@@ -229,8 +166,9 @@ const save = () => {
     audioVolumeArray.push(vol);
   }
   let savedCombination = jQuery.parseJSON(savedData) || {};
-  savedCombination[$("#myID").val() || 'Combo'] = audioVolumeArray;
+  savedCombination[$('#combo-input').val() || 'Combo'] = audioVolumeArray;
   localStorage.setItem('savedCombination', JSON.stringify(savedCombination));
+  return 'success';
 }
 
 /* Delete the existing saved combination in local storage */
@@ -255,7 +193,7 @@ const playSavedCombination = (name) => {
       return;
     }
   }
-  alert("Sorry ! There was some error in data. Can't play this combination");
+  alert('Sorry ! There was some error in data. Can\'t play this combination');
 }
 
 /* To play a combination */
@@ -271,9 +209,151 @@ const playCombination = (audioVolumeArray) => {
 const getCombinationsNameList = () => {
   let savedData = localStorage.getItem('savedCombination');
   if (savedData) {
-    return Object.keys(jQuery.parseJSON(savedData));
+    const savedNames = Object.keys(jQuery.parseJSON(savedData));
+    const altMenu = $('.alt-menu');
+    savedNames.forEach((name) => {
+      let template = '<div class="menu-option combo-option"><div class="option"><img src="./assets/images/music-icon.svg" class="svg option-icon info-icon" /></div><div class="text">' + name + '</div><div class="option delete-sound" onClick="deleteCombination(\"'+ name +'\")"><img src="./assets/images/delete-button.svg" class="svg option-icon delete-icon" /></div></div>';
+      altMenu.append(template);
+    })
+    convertToInlineSvg();
   }
   else {
     return null;
   }
 }
+
+
+$(function() {
+  convertToInlineSvg();
+  getCombinationsNameList();
+
+  // open menu
+  $('.menu-bar').on('click', () => {
+    if ($('.menu').hasClass('menu-hidden')) {
+      $('.menu').removeClass('menu-hidden');
+      $('.container').addClass('menu-active');
+      $('body').addClass('hideOverflow');
+    } else {
+      $('.menu').addClass('menu-hidden');
+      $('.container').removeClass('menu-active');
+      $('body').removeClass('hideOverflow');
+    }
+  });
+
+  // open alternate menu
+  $('.alt-menu-bar').on('click', () => {
+    if ($('.alt-menu').hasClass('alt-menu-hidden')) {
+      $('.alt-menu').removeClass('alt-menu-hidden');
+      $('.container').addClass('alt-menu-active');
+      $('body').addClass('hideOverflow');
+    } else {
+      $('.alt-menu').addClass('alt-menu-hidden');
+      $('.container').removeClass('alt-menu-active');
+      $('body').removeClass('hideOverflow');
+    }
+  });
+
+  // close all menu
+  $('.overlay').on('click', () => {
+    $('.menu').addClass('menu-hidden');
+    $('.alt-menu').addClass('alt-menu-hidden');
+    $('.container').removeClass('menu-active');
+    $('.container').removeClass('alt-menu-active');
+  });
+
+  // open about modal
+  $('.about-option').on('click', (obj) => {
+    $('.menu').addClass('menu-hidden');
+    $('.container').removeClass('menu-active');
+
+    setTimeout(() => {
+      $('.about-modal').addClass('active');
+    }, 200)
+  });
+
+  // open feedback modal
+  $('.feedback-option').on('click', (obj) => {
+    $('.menu').addClass('menu-hidden');
+    $('.container').removeClass('menu-active');
+
+    setTimeout(() => {
+      $('.feedback-modal').addClass('active');
+    }, 200)
+  });
+
+  // close modal
+  $('.modal-close').on('click', () => {
+    closeModal();
+  });
+
+  // on feedback textarea active
+  $('.feedback-textarea').on('focus', () => {
+    $('.placeholder-text').addClass('hidden');
+  });
+
+  // on feedback textarea blur
+  $('.feedback-textarea').on('blur', () => {
+    if($('.feedback-textarea')[0].value === '') {
+      $('.placeholder-text').removeClass('hidden');
+    }
+  });
+
+  // on feedback submit
+  $('.feedback-button').on('click', () => {
+    let mailBody = $('.feedback-textarea')[0].value;
+    let subject = 'App feedback';
+    console.log(subject + '\n' + mailBody);
+    window.open('mailto:vatsalya25@gmail.com?subject='+ subject +'&body='+ mailBody);
+  });
+
+  // On clicking save button
+  $('.randomPlay.save').on('click', () => {
+    $('.saveName-modal').addClass('active');
+
+    setTimeout(() => {
+      $('.combo-input').focus();
+    }, 10);
+  });
+
+  // On clicking a saved sound in alternate menu
+  $('.combo-option').on('click', (clickedCombo) => {
+    let soundName = clickedCombo.target.children[1].innerText;
+
+    if ($(clickedCombo.target).hasClass('saved-active')) {
+      $(clickedCombo.target).removeClass('saved-active');
+
+      pauseAll();
+    } else {
+      $('.combo-option').removeClass('saved-active');
+      $(clickedCombo.target).addClass('saved-active');
+      playSavedCombination(soundName);
+    }
+  });
+
+  // on Saving a combination
+  $('.save-button').on('click', () => {
+    let msg = saveCombination();
+    console.log(msg);
+  });
+
+  // on clicking delete for a saved sound from the alternate menu
+  $('.delete-sound').on('click', () => {
+    $('.alt-menu').addClass('alt-menu-hidden');
+    $('.container').removeClass('alt-menu-active');
+
+    setTimeout(() => {
+      $('.deleteSaved-modal').addClass('active');
+    }, 200)
+  });
+
+  // on clicking 'NO' in the delete sound popup modal
+  $('.confirm-delete.no-button').on('click', () => {
+    closeModal();
+  })
+
+  // on clicking 'YES' in the delete sound popup modal
+  $('.confirm-delete.yes-button').on('click', () => {
+    // deleteCombination()
+    closeModal();
+  })
+});

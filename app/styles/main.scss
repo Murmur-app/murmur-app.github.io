@@ -21,6 +21,7 @@ body {
   .icon {
     fill: $palette_grain;
   }
+
   .container {
     text-align: center;
     width: 100%;
@@ -39,7 +40,7 @@ body {
       display: flex;
       flex-flow: row nowrap;
 
-      .menu-bar {
+      .menu-bar, .alt-menu-bar {
         display: flex;
         width: 50px;
         justify-content: center;
@@ -49,6 +50,10 @@ body {
           height: 20px;
           width: 20px;
         }
+      }
+
+      .alt-menu-bar {
+        margin-left: auto;
       }
 
       .title {
@@ -162,15 +167,15 @@ body {
           width: 65px;
 
           &.play-icon {
-            margin-left: 6px;
+            margin-left: 10px;
           }
         }
 
         &.pause,
         &.play {
-          height: 65px;
-          width: 65px;
-          padding: 15px;
+          height: 75px;
+          width: 75px;
+          padding: 12px;
           border: 3px solid $palette_grain;
           border-radius: 100%;
         }
@@ -193,14 +198,15 @@ body {
         transform: none;
       }
       .overlay {
-        position: absolute;
-        z-index: 6;
-        width: 100%;
-        height: calc(100vh - #{$header_height});
-        display: block;
-        background-color: transparentize(#000, 0.6);
+        @extend .overlay;
       }
-      // animation: container-slide 0.3s ease-out;
+    }
+
+    &.alt-menu-active {
+      margin-left: -1 * $menu-width;
+      .overlay {
+        @extend .overlay;
+      }
     }
   }
 
@@ -243,6 +249,41 @@ body {
     }
   }
 
+  .alt-menu {
+    @extend .menu;
+    right: 0;
+    left: auto;
+    margin-right: 0;
+    margin-left: auto;
+    height: 100vh;
+    padding-top: 0;
+    .title {
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .combo-option {
+      .option{
+        pointer-events: none;
+        &.delete-sound {
+          pointer-events: auto;
+          margin-left: auto;
+        }
+      }
+      .text {
+        pointer-events: none;
+      }
+      &.saved-active {
+        background-color: $palette_grain;
+        color: $palette_dark;
+        .option .icon {
+          fill: $palette_darker;
+        }
+      }
+    }
+  }
+
   .modal {
     position: fixed;
     width: 100%;
@@ -256,7 +297,6 @@ body {
     align-items: center;
 
     .modal-content {
-      position: absolute;
       transform: scale(0);
       width: 80%;
       border-radius: 20px;
@@ -265,6 +305,7 @@ body {
       display: flex;
       flex-flow: column nowrap;
       align-items: center;
+      margin-top: -15%;
 
       .modal-header {
         padding: 10px 0;
@@ -277,9 +318,9 @@ body {
         position: absolute;
         top: 0;
         right: 0;
-        width: 15px;
-        height: 15px;
-        padding: 10px;
+        width: 12px;
+        height: 12px;
+        padding: 14px;
         .icon {
           fill: $palette_dark;
         }
@@ -290,16 +331,18 @@ body {
         text-align: center;
         padding: 5px 15px 15px;
         box-sizing: border-box;
-        max-height: 300px;
+        max-height: 270px;
         width: 100%;
         overflow-y: auto;
         position: relative;
 
+        // styling for about modal
         .about {
           margin-top: 10px;
           text-align: left;
         }
 
+        // styling for feedback modal
         .feedback-textarea {
           outline: 0;
           resize: none;
@@ -316,15 +359,28 @@ body {
         .placeholder-text {
           position: absolute;
           pointer-events: none;
-          line-height: 1;
+          line-height: 1.3;
           font-size: 14px;
           left: 20px;
+          right: 20px;
           top: 13px;
           color: transparentize($palette_dark, 0.5);
         }
+
+        // styling for save combination name modal
+        .combo-input {
+          width: 80%;
+          padding: 5px 0;
+          color: $palette_dark;
+          font-size: 14px;
+          background-color: transparent;
+          outline: 0;
+          border: 0;
+          border-bottom: 1px solid $palette_dark;
+        }
       }
 
-      .feedback-button {
+      .modal-button {
         width: 100%;
         height: 40px;
         background-color: $palette_darker;
@@ -333,6 +389,28 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
+
+      }
+      .confirm {
+        width: 100%;
+        display: flex;
+
+        &-delete {
+          width: 50%;
+          height: 40px;
+          background-color: $palette_darker;
+          color: $palette_grain;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          &.yes-button {
+            border-radius: 0 0 0 20px;
+            border-right: 1px solid transparentize($palette_grain, 0.85);
+          }
+          &.no-button {
+            border-radius: 0 0 20px 0;
+          }
+        }
       }
     }
 
@@ -352,9 +430,24 @@ body {
     }
   }
 
+  .overlay {
+    position: fixed;
+    z-index: 6;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    display: block;
+    background-color: transparentize(#000, 0.6);
+  }
+
   .menu-hidden {
     display: flex;
     margin-left: -$menu-width;
+  }
+
+  .alt-menu-hidden {
+    display: flex;
+    margin-right: -$menu-width;
   }
 
   .hidden {
@@ -410,6 +503,16 @@ body {
         }
       }
 
+      &.alt-menu-active {
+        margin-left: -1 * $menu-width;
+        .header {
+          position: relative;
+          .title {
+            position: absolute;
+          }
+        }
+      }
+
       .header {
         .title {
           width: $menu-width;
@@ -426,6 +529,10 @@ body {
           .control-icon {
             height: 45px;
             width: 45px;
+
+            &.play-icon {
+              margin-left: 6px;
+            }
           }
 
           &.pause, &.play {
@@ -460,14 +567,10 @@ body {
 
 /* iPads (portrait) ----------- */
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
-  .audioItem {
-    flex: 0 0 100%;
-  }
+
 }
 
 /* Desktops and laptops ----------- */
 @media only screen and (min-width : 1224px) {
-  .audioItem {
-    flex: 0 0 15%;
-  }
+
 }

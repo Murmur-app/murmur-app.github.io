@@ -34,6 +34,9 @@
         <img src="./assets/images/menu-button.svg" class="svg menu-icon" />
       </div>
       <div class="title" /></div>
+      <div class="alt-menu-bar">
+        <img src="./assets/images/right-arrow-button.svg" class="svg menu-icon" />
+      </div>
   </div>
 
   <!-- Overlay -->
@@ -44,7 +47,7 @@
 
   <!-- Playback control section  -->
   <div class="playSection">
-    <div class="randomPlay save" onclick="save()">
+    <div class="randomPlay save">
       <img src="./assets/images/save-button.svg" class="svg control save-icon" />
     </div>
     <div class="play_pause">
@@ -66,17 +69,23 @@
     <!-- about -->
     <div class="menu-option about-option">
       <div class="option">
-        <img src="./assets/images/info-button.svg" class="svg option-icon info-icon" />
+        <img src="./assets/images/info-icon.svg" class="svg option-icon info-icon" />
       </div>
       <div class="text">About Murmur</div>
     </div>
     <!-- email feedback -->
     <div class="menu-option feedback-option">
       <div class="option">
-        <img src="./assets/images/feedback-button.svg" class="svg option-icon feedback-icon" />
+        <img src="./assets/images/feedback-icon.svg" class="svg option-icon feedback-icon" />
       </div>
       <div class="text">Give Feedback</div>
     </div>
+  </div>
+
+  <!-- Alternate Menu options - Saved Sounds menu -->
+  <div class="alt-menu alt-menu-hidden">
+    <div class="title">Saved Sounds</div>
+    <!-- Saved Sounds will be displayed here -->
   </div>
 
   <!-- About us modal -->
@@ -96,7 +105,7 @@
     </div>
   </div>
 
-  <!-- Foodback modal -->
+  <!-- Feedback modal -->
   <div class="modal feedback-modal">
     <div class="modal-content">
       <div class="modal-header">Feedback</div>
@@ -105,10 +114,43 @@
       </div>
       <div class="modal-body">
         <textarea class="feedback-textarea"></textarea>
-        <span class="placeholder-text">Provide your valuable feedback here &hearts;</span>
+        <span class="placeholder-text">Please provide your valuable feedback here &hearts;</span>
       </div>
-      <div class="feedback-button">
+      <div class="modal-button feedback-button">
         <div class="feedback-submit">Submit Feedback</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Name saved combination modal -->
+  <div class="modal saveName-modal">
+    <div class="modal-content">
+      <div class="modal-header">Combination Name</div>
+      <div class="modal-close">
+        <img src="./assets/images/cancel-button.svg" class="svg cancel-icon" />
+      </div>
+      <div class="modal-body">
+        <input id="combo-input" type="text" class="combo-input" value="Combo" />
+      </div>
+      <div class="modal-button save-button">
+        <div class="save-text">Save</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Name saved combination modal -->
+  <div class="modal deleteSaved-modal">
+    <div class="modal-content">
+      <div class="modal-header"></div>
+      <div class="modal-close">
+        <img src="./assets/images/cancel-button.svg" class="svg cancel-icon" />
+      </div>
+      <div class="modal-body">
+        <div>Are you sure you want to delete this combination?</div>
+      </div>
+      <div class="confirm">
+        <div class="confirm-delete yes-button">Yes</div>
+        <div class="confirm-delete no-button">No</div>
       </div>
     </div>
   </div>
