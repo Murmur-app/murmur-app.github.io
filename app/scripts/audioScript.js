@@ -189,6 +189,7 @@ const deleteCombination = (name) => {
       localStorage.setItem('savedCombination', JSON.stringify(savedJSON));
     }
   }
+  getCombinationsNameList();
 }
 
 /* Play selected combination when a name is selected from the saved list */
@@ -219,8 +220,9 @@ const getCombinationsNameList = () => {
   if (savedData) {
     const savedNames = Object.keys(jQuery.parseJSON(savedData));
     const altMenu = $('.alt-menu');
+    $('.alt-menu .combo-option').remove();
     savedNames.forEach((name) => {
-      let template = '<div class="menu-option combo-option"><div class="option"><img src="./assets/images/music-icon.svg" class="svg option-icon info-icon" /></div><div class="text">' + name + '</div><div class="option delete-sound" onClick="deleteCombination(\"' + name + '\")"><img src="./assets/images/delete-button.svg" class="svg option-icon delete-icon" /></div></div>';
+      let template = '<div class="menu-option combo-option" onClick="toggleComboPlay(this)" ><div class="option"><img src="./assets/images/music-icon.svg" class="svg option-icon info-icon" /></div><div class="text">' + name + '</div><div class="option delete-sound" onClick="deleteCombination(\''+ name +'\')"><img src="./assets/images/delete-button.svg" class="svg option-icon delete-icon" /></div></div>';
       altMenu.append(template);
     })
     convertToInlineSvg();
@@ -234,6 +236,20 @@ $.fn.setCursorToTextEnd = function() {
   var $initialVal = this.val();
   this.val($initialVal);
 };
+
+/* Play and pause on clicking a saved sound in alternate menu*/
+const toggleComboPlay = (clickedCombo) => {
+  let soundName = $(clickedCombo).children('.text')[0].innerText;
+
+  if ($(clickedCombo).hasClass('saved-active')) {
+    $(clickedCombo).removeClass('saved-active');
+    pauseAll();
+  } else {
+    $('.combo-option').removeClass('saved-active');
+    $(clickedCombo).addClass('saved-active');
+    playSavedCombination(soundName);
+  }
+}
 
 
 $(function() {
@@ -255,6 +271,7 @@ $(function() {
 
   // open alternate menu
   $('.alt-menu-bar').on('click', () => {
+    getCombinationsNameList();
     if ($('.alt-menu').hasClass('alt-menu-hidden')) {
       $('.alt-menu').removeClass('alt-menu-hidden');
       $('.container').addClass('alt-menu-active');
@@ -327,21 +344,6 @@ $(function() {
       $('#combo-input').focus();
       $('#combo-input').setCursorToTextEnd();
     }, 10);
-  });
-
-  // On clicking a saved sound in alternate menu
-  $('.combo-option').on('click', (clickedCombo) => {
-    let soundName = clickedCombo.target.children[1].innerText;
-
-    if ($(clickedCombo.target).hasClass('saved-active')) {
-      $(clickedCombo.target).removeClass('saved-active');
-
-      pauseAll();
-    } else {
-      $('.combo-option').removeClass('saved-active');
-      $(clickedCombo.target).addClass('saved-active');
-      playSavedCombination(soundName);
-    }
   });
 
   // on Saving a combination
