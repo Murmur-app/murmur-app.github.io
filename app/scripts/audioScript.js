@@ -51,6 +51,7 @@ const playAudio = (audioIndex, audioVolume = 50) => {
     // $('.randomPlay.play').addClass( 'pause' ).removeClass( 'play' );
     $('.randomPlay.play').addClass('hidden');
     $('.randomPlay.pause').removeClass('hidden');
+    $('.randomPlay.save').removeClass('disabled');
   } else {
     currAudio.pause();
     $('.audioItem' + audioIndex).removeClass('active');
@@ -64,6 +65,7 @@ const playAudio = (audioIndex, audioVolume = 50) => {
       // $('.randomPlay.pause').addClass( 'play' ).removeClass( 'pause' );
       $('.randomPlay.play').removeClass('hidden');
       $('.randomPlay.pause').addClass('hidden');
+      $('.randomPlay.save').addClass('disabled');
     }
   }
 }
@@ -86,6 +88,7 @@ const pauseAll = () => {
   // $('.randomPlay.pause').addClass( 'play' ).removeClass( 'pause' );
   $('.randomPlay.play').removeClass('hidden');
   $('.randomPlay.pause').addClass('hidden');
+  $('.randomPlay.save').addClass('disabled');
   return playing;
 }
 

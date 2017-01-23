@@ -180,6 +180,13 @@ body {
           border-radius: 100%;
         }
 
+        &.disabled {
+          pointer-events: none;
+          .icon {
+            opacity: 0.2;
+          }
+        }
+
         &.hidden {
           display: none;
         }
@@ -258,10 +265,11 @@ body {
     height: 100vh;
     padding-top: 0;
     .title {
-      height: 50px;
+      height: $header_height - 1px;
       display: flex;
       justify-content: center;
       align-items: center;
+      border-bottom: 1px solid $palette_darker;
     }
     .combo-option {
       .option{
@@ -321,6 +329,7 @@ body {
         width: 12px;
         height: 12px;
         padding: 14px;
+        z-index: 7;
         .icon {
           fill: $palette_dark;
         }
@@ -340,6 +349,7 @@ body {
         .about {
           margin-top: 10px;
           text-align: left;
+          pointer-events: none;
         }
 
         // styling for feedback modal
