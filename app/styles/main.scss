@@ -1,9 +1,7 @@
 // bower:scss
 // endbower
-
 @import 'constants.scss';
 @import 'mixins.scss';
-
 @include font-face(roboto-regular);
 @include font-face(OpenSans-Semibold);
 @include font-face(OpenSans-Regular);
@@ -42,7 +40,8 @@ body {
       display: flex;
       flex-flow: row nowrap;
 
-      .menu-bar, .alt-menu-bar {
+      .alt-menu-bar,
+      .menu-bar {
         display: flex;
         width: 50px;
         justify-content: center;
@@ -115,13 +114,24 @@ body {
           margin-left: auto;
 
           .noUi-handle {
-            width: 12px;
-            height: 12px;
-            left: -5px;
+            position: relative;
+            width: 14px;
+            height: 14px;
+            left: -7px;
+            top: -7px;
             border: 0;
             border-radius: 20px;
 
-            &:after,
+            &:after {
+              content: '';
+              height: 40px;
+              width: 40px;
+              top: -13px;
+              left: -13px;
+              background-color: transparent;
+              position: absolute;
+            }
+
             &:before {
               display: none;
             }
@@ -151,7 +161,8 @@ body {
       align-items: center;
       background-color: $palette_darker;
 
-      .randomPlay, .play_pause {
+      .play_pause,
+      .randomPlay {
         display: block;
         display: flex;
         justify-content: space-around;
@@ -184,6 +195,7 @@ body {
 
         &.disabled {
           pointer-events: none;
+
           .icon {
             opacity: 0.2;
           }
@@ -197,6 +209,7 @@ body {
 
     &.menu-active {
       margin-left: $menu-width;
+
       .header .title {
         position: fixed;
         height: $header_height;
@@ -206,6 +219,7 @@ body {
         left: 0;
         transform: none;
       }
+
       .overlay {
         @extend .overlay;
       }
@@ -213,6 +227,7 @@ body {
 
     &.alt-menu-active {
       margin-left: -1 * $menu-width;
+
       .overlay {
         @extend .overlay;
       }
@@ -266,6 +281,7 @@ body {
     margin-left: auto;
     height: 100vh;
     padding-top: 0;
+
     .title {
       height: $header_height - 1px;
       display: flex;
@@ -273,20 +289,25 @@ body {
       align-items: center;
       border-bottom: 1px solid $palette_darker;
     }
+
     .combo-option {
-      .option{
+      .option {
         pointer-events: none;
+
         &.delete-sound {
           pointer-events: auto;
           margin-left: auto;
         }
       }
+
       .text {
         pointer-events: none;
       }
+
       &.saved-active {
         background-color: $palette_grain;
         color: $palette_dark;
+
         .option .icon {
           fill: $palette_darker;
         }
@@ -332,6 +353,7 @@ body {
         height: 12px;
         padding: 14px;
         z-index: 7;
+
         .icon {
           fill: $palette_dark;
         }
@@ -346,14 +368,12 @@ body {
         width: 100%;
         overflow-y: auto;
         position: relative;
-
         // styling for about modal
         .about {
           margin-top: 10px;
           text-align: left;
           pointer-events: none;
         }
-
         // styling for feedback modal
         .feedback-textarea {
           outline: 0;
@@ -368,6 +388,7 @@ body {
           box-sizing: border-box;
           background-color: transparent;
         }
+
         .placeholder-text {
           position: absolute;
           pointer-events: none;
@@ -378,7 +399,6 @@ body {
           top: 13px;
           color: transparentize($palette_dark, 0.5);
         }
-
         // styling for save combination name modal
         .combo-input {
           width: 80%;
@@ -390,8 +410,9 @@ body {
           border: 0;
           border-bottom: 1px solid $palette_dark;
         }
+
         .combo-error {
-          margin: 10px auto;;
+          margin: 10px auto;
           width: 80%;
           color: $palette_oxblood;
         }
@@ -406,8 +427,8 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-
       }
+
       .confirm {
         width: 100%;
         display: flex;
@@ -420,10 +441,12 @@ body {
           display: flex;
           justify-content: center;
           align-items: center;
+
           &.yes-button {
             border-radius: 0 0 0 20px;
             border-right: 1px solid transparentize($palette_grain, 0.85);
           }
+
           &.no-button {
             border-radius: 0 0 20px 0;
           }
@@ -433,6 +456,7 @@ body {
 
     &.active {
       display: flex;
+
       .modal-content {
         animation: modal-popin 0.3s ease-in;
         transform: scale(1);
@@ -475,31 +499,29 @@ body {
     overflow: hidden;
   }
 }
-
 // animations
 @keyframes modal-popin {
   0% {
     display: none;
     transform: scale(0);
   }
+
   100% {
     display: flex;
     transform: scale(1);
   }
 }
-
 @keyframes modal-popout {
   0% {
     display: flex;
     transform: scale(1);
   }
+
   100% {
     display: none;
     transform: scale(0);
   }
 }
-
-
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 425px) {
   .audioItem {
@@ -507,14 +529,15 @@ body {
     height: 100px;
   }
 }
-
 /* Smartphones (landscape) ----------- */
 @media only screen and (min-width : 321px) and (orientation: landscape) {
   body {
     $menu-width: 40vw;
+
     .container {
       &.menu-active {
         margin-left: $menu-width;
+
         .header .title {
           width: $menu-width;
         }
@@ -522,8 +545,10 @@ body {
 
       &.alt-menu-active {
         margin-left: -1 * $menu-width;
+
         .header {
           position: relative;
+
           .title {
             position: absolute;
           }
@@ -552,7 +577,8 @@ body {
             }
           }
 
-          &.pause, &.play {
+          &.pause,
+          &.play {
             height: 45px;
             width: 45px;
             padding: 10px;
@@ -560,34 +586,29 @@ body {
         }
       }
     }
+
     .menu {
       width: $menu-width;
     }
   }
 }
-
 /* iPhone 5 (portrait) ----------- */
-@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait){
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) {
   body .container .playSection .randomPlay {
     .control-icon {
       height: 55px;
       width: 55px;
     }
 
-    &.pause, &.play {
+    &.pause,
+    &.play {
       height: 55px;
       width: 55px;
       padding: 10px;
     }
   }
 }
-
 /* iPads (portrait) ----------- */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
-
-}
-
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {}
 /* Desktops and laptops ----------- */
-@media only screen and (min-width : 1224px) {
-
-}
+@media only screen and (min-width : 1224px) {}

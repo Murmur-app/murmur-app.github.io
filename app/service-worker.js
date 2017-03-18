@@ -1,3 +1,5 @@
+importScripts('cache-polyfill.js');
+
 var dataCacheName = 'murmurData-v1';
 var cacheName = 'murmurPWA-final-1';
 var filesToCache = [
@@ -14,7 +16,7 @@ var filesToCache = [
   '/assets/images/audio-icons/Thunder.svg',
   '/assets/images/audio-icons/Underwater.svg',
   '/assets/images/audio-icons/Waves.svg',
-  '/assets/images/audio-icons/Waves_2.svg',
+  '/assets/images/audio-icons/Beach.svg',
   '/assets/images/cancel-button.svg',
   '/assets/images/delete-button.svg',
   '/assets/images/feedback-icon.svg',
@@ -48,7 +50,7 @@ var filesToCache = [
   '/assets/audio/Thunder.mp3',
   '/assets/audio/Underwater.mp3',
   '/assets/audio/Waves.mp3',
-  '/assets/audio/Waves_2.mp3',
+  '/assets/audio/Beach.mp3',
   '/assets/fonts/OpenSans-Regular.ttf',
   '/assets/fonts/OpenSans-Semibold.ttf',
   '/assets/fonts/roboto-regular.ttf',
