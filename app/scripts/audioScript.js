@@ -202,7 +202,6 @@ const playSavedCombination = (name) => {
       return;
     }
   }
-  alert('Sorry ! There was some error in data. Can\'t play this combination');
 }
 
 /* To play a combination */
@@ -247,6 +246,7 @@ const toggleComboPlay = (clickedCombo) => {
   } else {
     $('.combo-option').removeClass('saved-active');
     $(clickedCombo).addClass('saved-active');
+    pauseAll();
     playSavedCombination(soundName);
   }
 }
