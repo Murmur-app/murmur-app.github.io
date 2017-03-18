@@ -453,6 +453,10 @@ body {
       }
     }
 
+    .warning-popup {
+      display: none;
+    }
+
     .overlay {
       position: fixed;
       z-index: 6;
@@ -482,30 +486,6 @@ body {
     }
   }
 }
-
-// animations
-@keyframes modal-popin {
-  0% {
-    display: none;
-    transform: scale(0);
-  }
-  100% {
-    display: flex;
-    transform: scale(1);
-  }
-}
-
-@keyframes modal-popout {
-  0% {
-    display: flex;
-    transform: scale(1);
-  }
-  100% {
-    display: none;
-    transform: scale(0);
-  }
-}
-
 
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 425px) {
@@ -630,6 +610,7 @@ body {
 @media only screen and (min-width : 1224px) {
   body {
     .body-container {
+      position: relative;
       .container {
         .header .title {
           width: 28vw;
@@ -655,6 +636,64 @@ body {
       .modal .modal-content {
         width: 40%;
       }
+      .warning-popup {
+        display: flex;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px 30px;
+        background-color: $palette_dark;
+        border-radius: 20px;
+        opacity: 0;
+        animation: notification-in 0.5s ease-out 0.5s forwards, notification-out 0.5s ease-out 2.5s forwards;
+      }
     }
+  }
+}
+
+
+// animations
+@keyframes modal-popin {
+  0% {
+    display: none;
+    transform: scale(0);
+  }
+  100% {
+    display: flex;
+    transform: scale(1);
+  }
+}
+
+@keyframes modal-popout {
+  0% {
+    display: flex;
+    transform: scale(1);
+  }
+  100% {
+    display: none;
+    transform: scale(0);
+  }
+}
+
+@keyframes notification-in {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes notification-out {
+  0% {
+    display: flex;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    display: none;
+    transform: translate(-50%, -50%) scale(0);
   }
 }
