@@ -30,132 +30,134 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="menu-bar">
-        <img src="./assets/images/menu-button.svg" class="svg menu-icon" />
+  <div class="body-container">
+    <div class="container">
+      <div class="header">
+        <div class="menu-bar">
+          <img src="./assets/images/menu-button.svg" class="svg menu-icon" />
+        </div>
+        <div class="title" /></div>
+        <div class="alt-menu-bar">
+          <img src="./assets/images/right-arrow-button.svg" class="svg menu-icon" />
+        </div>
       </div>
-      <div class="title" /></div>
-      <div class="alt-menu-bar">
-        <img src="./assets/images/right-arrow-button.svg" class="svg menu-icon" />
-      </div>
-  </div>
 
-  <!-- Overlay -->
-  <div class="overlay"></div>
+      <!-- Overlay -->
+      <div class="overlay"></div>
 
-  <!-- List of audios -->
-  <div class="audioSection"></div>
+      <!-- List of audios -->
+      <div class="audioSection"></div>
 
-  <!-- Playback control section  -->
-  <div class="playSection">
-    <div class="randomPlay save disabled">
-      <img src="./assets/images/save-button.svg" class="svg control save-icon" />
-    </div>
-    <div class="play_pause">
-      <div class="randomPlay play" onclick="globalPlay()">
-        <img src="./assets/images/play-button.svg" class="svg control control-icon play-icon" />
-      </div>
-      <div class="randomPlay pause hidden" onclick="saveLastPlayed();pauseAll()">
-        <img src="./assets/images/pause-button.svg" class="svg control control-icon pause-icon" />
-      </div>
-    </div>
-    <div class="randomPlay shuffle" onclick="shuffle()">
-      <img src="./assets/images/shuffle-button.svg" class="svg control shuffle-icon" />
-    </div>
-  </div>
-  </div>
-
-  <!-- Menu options -->
-  <div class="menu menu-hidden">
-    <!-- about -->
-    <div class="menu-option about-option">
-      <div class="option">
-        <img src="./assets/images/info-icon.svg" class="svg option-icon info-icon" />
-      </div>
-      <div class="text">About Murmur</div>
-    </div>
-    <!-- email feedback -->
-    <div class="menu-option feedback-option">
-      <div class="option">
-        <img src="./assets/images/feedback-icon.svg" class="svg option-icon feedback-icon" />
-      </div>
-      <div class="text">Give Feedback</div>
-    </div>
-  </div>
-
-  <!-- Alternate Menu options - Saved Sounds menu -->
-  <div class="alt-menu alt-menu-hidden">
-    <div class="title">Saved Sounds</div>
-    <!-- Saved Sounds will be displayed here -->
-  </div>
-
-  <!-- About us modal -->
-  <div class="modal about-modal">
-    <div class="modal-content">
-      <div class="modal-header">About Us</div>
-      <div class="modal-close">
-        <img src="./assets/images/cancel-button.svg" class="svg cancel-icon" />
-      </div>
-      <div class="modal-body">
-        <div>“Choose only one master – Nature”</div>
-        <div>–Rembrandt</div>
-        <div class="about">Hi! We are Vatsalya Prakash and Himanshu Singh, two developers with a passion for creativity; and we strongly believe that nature is the best source to boost your imaginative minds. Thus, we came up with <b>Murmur</b>, which attempts to bring
-          you as close to nature as you possible can from the comfort of your home or office.</div>
-        <div class="about">So, put on your headphones and let your creativity run free.</div>
+      <!-- Playback control section  -->
+      <div class="playSection">
+        <div class="randomPlay save disabled">
+          <img src="./assets/images/save-button.svg" class="svg control save-icon" />
+        </div>
+        <div class="play_pause">
+          <div class="randomPlay play" onclick="globalPlay()">
+            <img src="./assets/images/play-button.svg" class="svg control control-icon play-icon" />
+          </div>
+          <div class="randomPlay pause hidden" onclick="saveLastPlayed();pauseAll()">
+            <img src="./assets/images/pause-button.svg" class="svg control control-icon pause-icon" />
+          </div>
+        </div>
+        <div class="randomPlay shuffle" onclick="shuffle()">
+          <img src="./assets/images/shuffle-button.svg" class="svg control shuffle-icon" />
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Feedback modal -->
-  <div class="modal feedback-modal">
-    <div class="modal-content">
-      <div class="modal-header">Feedback</div>
-      <div class="modal-close">
-        <img src="./assets/images/cancel-button.svg" class="svg cancel-icon" />
+    <!-- Menu options -->
+    <div class="menu menu-hidden">
+      <!-- about -->
+      <div class="menu-option about-option">
+        <div class="option">
+          <img src="./assets/images/info-icon.svg" class="svg option-icon info-icon" />
+        </div>
+        <div class="text">About Murmur</div>
       </div>
-      <div class="modal-body">
-        <textarea class="feedback-textarea"></textarea>
-        <span class="placeholder-text">Please provide your valuable feedback here &hearts;</span>
-      </div>
-      <div class="modal-button feedback-button">
-        <div class="feedback-submit">Submit Feedback</div>
+      <!-- email feedback -->
+      <div class="menu-option feedback-option">
+        <div class="option">
+          <img src="./assets/images/feedback-icon.svg" class="svg option-icon feedback-icon" />
+        </div>
+        <div class="text">Give Feedback</div>
       </div>
     </div>
-  </div>
 
-  <!-- Name saved combination modal -->
-  <div class="modal saveName-modal">
-    <div class="modal-content">
-      <div class="modal-header">Combination Name</div>
-      <div class="modal-close">
-        <img src="./assets/images/cancel-button.svg" class="svg cancel-icon" />
-      </div>
-      <div class="modal-body">
-        <input id="combo-input" type="text" class="combo-input" value="Combo " maxlength="30" />
-        <div class="combo-error"></div>
-      </div>
-      <div class="modal-button save-button">
-        <div class="save-text">Save</div>
-      </div>
+    <!-- Alternate Menu options - Saved Sounds menu -->
+    <div class="alt-menu alt-menu-hidden">
+      <div class="title">Saved Sounds</div>
+      <!-- Saved Sounds will be displayed here -->
     </div>
-  </div>
 
-  <!-- Name saved combination modal -->
-  <div class="modal deleteSaved-modal">
-    <div class="modal-content">
-      <div class="modal-header"></div>
-      <div class="modal-close">
-        <img src="./assets/images/cancel-button.svg" class="svg cancel-icon" />
+    <!-- About us modal -->
+    <div class="modal about-modal">
+      <div class="modal-content">
+        <div class="modal-header">About Us</div>
+        <div class="modal-close">
+          <img src="./assets/images/cancel-button.svg" class="svg cancel-icon" />
+        </div>
+        <div class="modal-body">
+          <div>“Choose only one master – Nature”</div>
+          <div>–Rembrandt</div>
+          <div class="about">Hi! We are Vatsalya Prakash and Himanshu Singh, two developers with a passion for creativity; and we strongly believe that nature is the best source to boost your imaginative minds. Thus, we came up with <b>Murmur</b>, which attempts to bring
+            you as close to nature as you possible can from the comfort of your home or office.</div>
+            <div class="about">So, put on your headphones and let your creativity run free.</div>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-        <div>Are you sure you want to delete this combination?</div>
+
+      <!-- Feedback modal -->
+      <div class="modal feedback-modal">
+        <div class="modal-content">
+          <div class="modal-header">Feedback</div>
+          <div class="modal-close">
+            <img src="./assets/images/cancel-button.svg" class="svg cancel-icon" />
+          </div>
+          <div class="modal-body">
+            <textarea class="feedback-textarea"></textarea>
+            <span class="placeholder-text">Please provide your valuable feedback here &hearts;</span>
+          </div>
+          <div class="modal-button feedback-button">
+            <div class="feedback-submit">Submit Feedback</div>
+          </div>
+        </div>
       </div>
-      <div class="confirm">
-        <div class="confirm-delete yes-button">Yes</div>
-        <div class="confirm-delete no-button">No</div>
+
+      <!-- Name saved combination modal -->
+      <div class="modal saveName-modal">
+        <div class="modal-content">
+          <div class="modal-header">Combination Name</div>
+          <div class="modal-close">
+            <img src="./assets/images/cancel-button.svg" class="svg cancel-icon" />
+          </div>
+          <div class="modal-body">
+            <input id="combo-input" type="text" class="combo-input" value="Combo " maxlength="30" />
+            <div class="combo-error"></div>
+          </div>
+          <div class="modal-button save-button">
+            <div class="save-text">Save</div>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <!-- Name saved combination modal -->
+      <div class="modal deleteSaved-modal">
+        <div class="modal-content">
+          <div class="modal-header"></div>
+          <div class="modal-close">
+            <img src="./assets/images/cancel-button.svg" class="svg cancel-icon" />
+          </div>
+          <div class="modal-body">
+            <div>Are you sure you want to delete this combination?</div>
+          </div>
+          <div class="confirm">
+            <div class="confirm-delete yes-button">Yes</div>
+            <div class="confirm-delete no-button">No</div>
+          </div>
+        </div>
+      </div>
   </div>
 
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
