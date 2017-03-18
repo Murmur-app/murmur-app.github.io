@@ -12,7 +12,7 @@ body {
   background-color: $palette_darker;
   margin: 0;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 25px);
   min-width: 300px;
   min-height: 500px;
   -webkit-tap-highlight-color: transparent;
