@@ -14,6 +14,7 @@ body {
   min-width: 300px;
   min-height: 500px;
   background-color: $palette_darker;
+  overflow-y: hidden;
 
   .body-container {
     font-family: OpenSans-Regular, Helvetica, sans-serif;
@@ -23,6 +24,7 @@ body {
     height: calc(100% - 25px);
     -webkit-tap-highlight-color: transparent;
     transform: translate3d(0,0,0);
+    overflow-y: hidden;
 
     .icon {
       fill: $palette_grain;
