@@ -13,11 +13,11 @@ body {
   height: calc(100vh - 25px);
   min-width: 300px;
   min-height: 500px;
+  background-color: $palette_darker;
 
   .body-container {
     font-family: OpenSans-Regular, Helvetica, sans-serif;
     color: #fff;
-    background-color: $palette_darker;
     margin: 0;
     width: 100vw;
     height: 100%;
