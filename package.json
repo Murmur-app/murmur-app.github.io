@@ -43,5 +43,7 @@
       ]
     }
   },
-  "dependencies": {}
+  "dependencies": {
+    "sw-toolbox": "3.4.0"
+  }
 }

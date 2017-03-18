@@ -10,6 +10,24 @@ window.addEventListener('load', function() {
 });
 }
 
+// handling 'add to home screen' prompt
+window.addEventListener('beforeinstallprompt', function(e) {
+  // beforeinstallprompt Event fired
+
+  // e.userChoice will return a Promise.
+  e.userChoice.then(function(choiceResult) {
+
+    console.log(choiceResult.outcome);
+
+    if(choiceResult.outcome == 'dismissed') {
+      console.log('User cancelled home screen install');
+    }
+    else {
+      console.log('User added to home screen');
+    }
+  });
+});
+
 var convertToInlineSvg = function(doThis) {
   $('img.svg').each(function() {
     var $img = jQuery(this);
