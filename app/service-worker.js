@@ -74,15 +74,8 @@ self.addEventListener('install', function(e) {
 self.addEventListener('fetch', function(e) {
   console.log('[ServiceWorker] Fetch', e.request.url);
   e.respondWith(
-    caches.match(e.request).then(function(resp) {
-      return resp || fetch(e.request).then(function(response) {                 // add new requests to cache automatically
-        caches.open(cacheName).then(function(cache) {
-          cache.put(event.request, response.clone());
-        });
-        return response;
-      });
-    }).catch(function() {
-      return caches.match('/sw-test/gallery/myLittleVader.jpg');
+    caches.match(e.request).then(function(response) {
+      return response || fetch(e.request);
     })
   );
 });
