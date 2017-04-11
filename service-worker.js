@@ -1,8 +1,9 @@
 importScripts('cache-polyfill.js');
 
 var dataCacheName = 'murmurData-v1';
-var cacheName = 'murmurPWA-final-1';
-var filesToCache = [
+var cacheName1 = 'murmurPWA-final-1';
+var cacheName2 = 'murmurPWA-final-2';
+var filesToCache1 = [
   './',
   './assets/images/audio-icons/Birds.svg',
   './assets/images/audio-icons/Dryer.svg',
@@ -41,7 +42,10 @@ var filesToCache = [
   './assets/audio/Birds.mp3',
   './assets/audio/Dryer.mp3',
   './assets/audio/Fire.mp3',
-  './assets/audio/Forest_waterfall.mp3',
+  './assets/audio/Forest_waterfall.mp3'
+];
+
+var filesToCache2 = [
   './assets/audio/Humans.mp3',
   './assets/audio/Ocean.mp3',
   './assets/audio/Rain.mp3',
@@ -64,9 +68,19 @@ var filesToCache = [
 self.addEventListener('install', function(e) {
   console.log('[ServiceWorker] Install');
   e.waitUntil(
-    caches.open(cacheName).then(function(cache) {
+    caches.open(cacheName1).then(function(cache) {
       console.log('[ServiceWorker] Caching app shell');
-      return cache.addAll(filesToCache);
+      return cache.addAll(filesToCache1);
+    })
+  );
+});
+
+self.addEventListener('install', function(e) {
+  console.log('[ServiceWorker] Install');
+  e.waitUntil(
+    caches.open(cacheName2).then(function(cache) {
+      console.log('[ServiceWorker] Caching app shell');
+      return cache.addAll(filesToCache2);
     })
   );
 });
