@@ -262,7 +262,7 @@ const playFromQueryParams = () => {
     return;
   }
   const audios = URIHandler.getItems();
-  Object.keys(audios).forEach(audioIndex => playAudio(audioIndex, audios[audioIndex]));
+  Object.keys(audios).forEach(audioIndex => playAudio(audioIndex, parseFloat(audios[audioIndex]) * 100));
 };
 
 $(function() {
