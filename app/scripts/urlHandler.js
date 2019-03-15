@@ -38,17 +38,11 @@ const URIHandler = (() => {
         }
     }
 
-    function resetItems() {
-        urlState = {};
-        updateURI();
-    }
-
     return {
         setItem,
         getItems,
         hasItems,
-        removeItem,
-        resetItems
+        removeItem
     }
 
 })();
