@@ -33,6 +33,7 @@ const playAudio = (audioIndex, audioVolume = 50) => {
 
   if (currAudio.paused) {
     currAudio.play();
+    URIHandler.setItem(audioIndex, audioVolume);
 
     $('.audioItem' + audioIndex).addClass('active');
 
@@ -47,6 +48,7 @@ const playAudio = (audioIndex, audioVolume = 50) => {
 
     slider.noUiSlider.on('update', (values, handle) => {
       currAudio.volume = Math.round(values[handle]) / 100;
+      URIHandler.setItem(audioIndex, currAudio.volume);
     });
     // $('.randomPlay.play').addClass( 'pause' ).removeClass( 'play' );
     $('.randomPlay.play').addClass('hidden');
@@ -54,6 +56,7 @@ const playAudio = (audioIndex, audioVolume = 50) => {
     $('.randomPlay.save').removeClass('disabled');
   } else {
     currAudio.pause();
+    URIHandler.removeItem(audioIndex, audioVolume);
     $('.audioItem' + audioIndex).removeClass('active');
     slider.noUiSlider.destroy();
     let playCount = 0;
@@ -249,13 +252,23 @@ const toggleComboPlay = (clickedCombo) => {
     pauseAll();
     playSavedCombination(soundName);
   }
-}
+};
 
+/**
+ * Play from query params if localstorage is empty;
+ */
+const playFromQueryParams = () => {
+  if(!URIHandler.hasItems()) {
+    return;
+  }
+  const audios = URIHandler.getItems();
+  Object.keys(audios).forEach(audioIndex => playAudio(audioIndex, parseFloat(audios[audioIndex]) * 100));
+};
 
 $(function() {
   convertToInlineSvg();
   getCombinationsNameList();
-
+  playFromQueryParams();
   // open menu
   $('.menu-bar').on('click', () => {
     if ($('.menu').hasClass('menu-hidden')) {
